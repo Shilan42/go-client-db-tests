@@ -9,7 +9,7 @@ import (
 	_ "modernc.org/sqlite"
 )
 
-// Тест проверяет корректность работы функции selectClient при успешном выполнении
+// Тест проверяет корректность работы функции selectClient при успешном выполнении.
 func Test_SelectClient_WhenOk(t *testing.T) {
 	// Подключение к базе данных SQLite
 	db, err := sql.Open("sqlite", "demo.db")
@@ -37,7 +37,7 @@ func Test_SelectClient_WhenOk(t *testing.T) {
 	})
 }
 
-// Тест проверяет корректность обработки кейсов, когда клиент с указанным ID отсутствует в БД
+// Тест проверяет корректность обработки кейсов, когда клиент с указанным ID отсутствует в БД.
 func Test_SelectClient_WhenNoClient(t *testing.T) {
 	// Подключение к базе данных SQLite
 	db, err := sql.Open("sqlite", "demo.db")
@@ -54,7 +54,7 @@ func Test_SelectClient_WhenNoClient(t *testing.T) {
 	require.Error(t, err, "expected error when selecting non-existent client with ID %d", clientID)
 	require.Equal(t, sql.ErrNoRows, err, "expected sql.ErrNoRows error when selecting client with ID %d", clientID)
 
-	// Подтест для проверки состояния объекта клиента на отсутствии данных в БД
+	// Подтест для проверки состояния объекта клиента на отсутствии данных в БД.
 	t.Run("CheckClientFields", func(t *testing.T) {
 		// Проверка, что все поля пустые
 		assert.Empty(t, client.ID, "ID field should be empty for non-existent client with ID %d", clientID)
@@ -65,7 +65,7 @@ func Test_SelectClient_WhenNoClient(t *testing.T) {
 	})
 }
 
-// Тест проверяет корректность вставки нового клиента в базу данных
+// Тест проверяет корректность вставки нового клиента в базу данных.
 func Test_InsertClient_ThenSelectAndCheck(t *testing.T) {
 	// Подключение к базе данных SQLite
 	db, err := sql.Open("sqlite", "demo.db")
@@ -102,7 +102,7 @@ func Test_InsertClient_ThenSelectAndCheck(t *testing.T) {
 	require.NoError(t, err, "Error deleting client with ID %d: %v", cl.ID, err)
 }
 
-// Тест проверяет корректность удаления нового клиента из БД
+// Тест проверяет корректность удаления нового клиента из БД.
 func Test_InsertClient_DeleteClient_ThenCheck(t *testing.T) {
 	// Подключение к базе данных SQLite
 	db, err := sql.Open("sqlite", "demo.db")
