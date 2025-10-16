@@ -15,7 +15,9 @@ func Test_SelectClient_WhenOk(t *testing.T) {
 	db, err := sql.Open("sqlite", "demo.db")
 	require.NoError(t, err, "database connection error: %v", err)
 	// Закрытие соединения после завершения теста
-	defer db.Close()
+	defer func() {
+		_ = db.Close()
+	}()
 
 	// ID клиента для тестирования
 	clientID := 1
@@ -43,7 +45,9 @@ func Test_SelectClient_WhenNoClient(t *testing.T) {
 	db, err := sql.Open("sqlite", "demo.db")
 	require.NoError(t, err, "database connection error: %v", err)
 	// Закрытие соединения после завершения теста
-	defer db.Close()
+	defer func() {
+		_ = db.Close()
+	}()
 
 	// Невалидный ID клиента для тестирования (несуществующий в базе)
 	clientID := -1
@@ -71,7 +75,9 @@ func Test_InsertClient_ThenSelectAndCheck(t *testing.T) {
 	db, err := sql.Open("sqlite", "demo.db")
 	require.NoError(t, err, "database connection error: %v", err)
 	// Закрытие соединения после завершения теста
-	defer db.Close()
+	defer func() {
+		_ = db.Close()
+	}()
 
 	// Создание тестового объекта клиента с тестовыми данными
 	cl := Client{
@@ -108,7 +114,9 @@ func Test_InsertClient_DeleteClient_ThenCheck(t *testing.T) {
 	db, err := sql.Open("sqlite", "demo.db")
 	require.NoError(t, err, "database connection error: %v", err)
 	// Закрытие соединения после завершения теста
-	defer db.Close()
+	defer func() {
+		_ = db.Close()
+	}()
 
 	// Создание тестового объекта клиента с тестовыми данными
 	cl := Client{
